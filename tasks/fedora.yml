@@ -1,0 +1,32 @@
+---
+# MS Teams
+
+- name: 'Importando a chave do repositorio do MS Teams'
+  rpm_key:
+    key: 'https://packages.microsoft.com/keys/microsoft.asc'
+    state: present
+  become: true
+  tags:
+    - repo
+    - teams
+
+- name: 'Copiando arquivo de repositório do MS Teams'
+  copy:
+    src: 'repos/teams-rpm.repo'
+    dest: '/etc/yum.repos.d/teams.repo'
+    owner: root
+    group: root
+    mode: '0644'
+  become: true
+  tags:
+    - repo
+    - teams
+
+- name: 'Instalando o MS Teams'
+  dnf:
+    name: teams
+    state: present
+    disable_gpg_check: yes
+  become: true
+  tags:
+    - teams

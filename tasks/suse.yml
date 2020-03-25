@@ -1,0 +1,52 @@
+---
+
+# MS Teams
+
+- name: 'Importando a chave do repositorio do MS Teams'
+  rpm_key:
+    key: 'https://packages.microsoft.com/keys/microsoft.asc'
+    state: present
+  become: true
+  tags:
+    - repo
+    - teams
+    - comunicadores
+
+- name: 'Copiando arquivo de repositório do MS Teams'
+  copy:
+    src: 'repos/teams-opensuse.repo'
+    dest: '/etc/zypp/repos.d/teams.repo'
+    owner: root
+    group: root
+    mode: '0644'
+  become: true
+  tags:
+    - repo
+    - comunicadores
+    - teams
+
+# Atualizando todos os repositorios
+
+- name: 'Atualizando todos os repositorios'
+  zypper_repository:
+    repo: '*'
+    runrefresh: yes
+    auto_import_keys: yes
+  become: true
+  tags:
+    - repo
+    - editores
+    - atom
+    - vscode
+
+# Skype
+
+- name: 'Instalando o MS Teams'
+  zypper:
+    name: 'teams'
+    state: present
+    force: yes
+  become: true
+  tags:
+    - teams
+    - comunicadores

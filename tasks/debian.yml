@@ -1,0 +1,31 @@
+---
+# MS Teams
+
+- name: 'Importando a chave do repositorio do MS Teams'
+  apt_key:
+    url: 'https://packages.microsoft.com/keys/microsoft.asc'
+    state: present
+  become: true
+  tags:
+    - repo
+    - teams
+
+- name: 'Adicionando o Repositorio do MS Teams'
+  apt_repository:
+    repo: 'deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main'
+    state: present
+    filename: teams
+    update_cache: yes
+  become: true
+  tags:
+    - repo
+    - teams
+
+- name: 'Instalando o MS Teams'
+  apt:
+    name: teams
+    state: present
+    update_cache: yes
+  become: true
+  tags:
+    - teams
