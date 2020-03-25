@@ -12,7 +12,7 @@
 
 - name: 'Copiando arquivo de repositório do MS Teams'
   copy:
-    src: 'repos/teams-rpm.repo'
+    src: 'teams-rpm.repo'
     dest: '/etc/yum.repos.d/teams.repo'
     owner: root
     group: root

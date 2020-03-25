@@ -14,7 +14,7 @@
 
 - name: 'Copiando arquivo de repositório do MS Teams'
   copy:
-    src: 'repos/teams-opensuse.repo'
+    src: 'teams-opensuse.repo'
     dest: '/etc/zypp/repos.d/teams.repo'
     owner: root
     group: root
