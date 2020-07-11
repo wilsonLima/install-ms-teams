@@ -45,7 +45,7 @@
   zypper:
     name: 'teams'
     state: present
-    force: yes
+    update_cache: yes
   become: true
   tags:
     - teams
